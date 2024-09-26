@@ -3,4 +3,9 @@ export interface Product {
     title: string;
     price: number;
     quantity: number;
+    createdAt?: string;
+    updatedAt?: string;
+    _v?: number;
 }
+
+export type NewProduct = Omit<Product, "_id">;

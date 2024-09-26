@@ -2,14 +2,14 @@ import { useState, useEffect } from 'react'
 import './index.css'
 import { Cart } from './components/Cart';
 import { ProductList } from './components/ProductList';
-import { getProducts } from './services/products';
-import { Product } from './types/types'
-
-// Types
+import { AddProductForm } from './components/AddProductForm';
+import { getProducts, createProduct } from './services/products';
+import { Product, NewProduct } from './types/types'
 
 function App() {
   const [cart, setCart] = useState([]);
   const [products, setProducts] = useState<Product[]>([]);
+  const [showProductForm, setShowProductForm] = useState(false);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -23,6 +23,24 @@ function App() {
     fetchProducts();
   }, []);
 
+  const handleHideForm = (): void => {
+    setShowProductForm(false);
+  };
+
+  const handleAddProduct = async (  
+    newProduct: NewProduct,
+    callback?: () => void
+  ) => {
+    try {
+      const data = await createProduct(newProduct);
+      setProducts((prevState) => prevState.concat(data));
+      if (callback) {
+        callback();
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <div id="app">
@@ -36,9 +54,18 @@ function App() {
           <h2>Products</h2>
           <ProductList products={products} />
         </div>
-        <p>
-          <button className="add-product-button">Add A Product</button>
-        </p>
+
+        {showProductForm ? (
+          <AddProductForm
+            onSubmit={handleAddProduct}
+            onHideProductForm={handleHideForm}
+          />
+        ) : (
+          <p>
+            <button className="add-product-button" onClick={() => setShowProductForm(true)}>Add A Product</button>
+          </p>
+        )}
+
       </main>
     </div>
   )
