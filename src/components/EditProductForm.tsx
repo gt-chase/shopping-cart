@@ -8,7 +8,7 @@ interface EditProductFormProps {
     onHideEditForm: () => void;
 }
 
-export const EditProductForm = ({ initialTitle, initialPrice, initialQuantity, onHideEditForm}: EditProductFormProps) => {
+export const EditProductForm = ({ id, initialTitle, initialPrice, initialQuantity, onHideEditForm}: EditProductFormProps) => {
     const [title, setTitle] = useState(initialTitle);
     const [price, setPrice] = useState(initialPrice);
     const [quantity, setQuantity] = useState(initialQuantity);

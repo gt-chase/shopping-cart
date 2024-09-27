@@ -3,9 +3,8 @@ import './index.css'
 import { Cart } from './components/Cart';
 import { ProductList } from './components/ProductList';
 import { AddProductForm } from './components/AddProductForm';
-import { getProducts, createProduct } from './services/products';
+import { getProducts, createProduct, editProduct } from './services/products';
 import { Product, NewProduct } from './types/types'
-import { editProduct } from './services/products';
 
 function App() {
   const [cart, setCart] = useState([]);
@@ -44,19 +43,22 @@ function App() {
   };
 
   const handleEditProduct = async (
-    updatedProduct,
-    productId,
+    updatedProduct: Product,
+    productId: string,
     callback?: () => void
   ) => {
     try{
       // const product = products.find(n => n.productId === productId);
       await editProduct(updatedProduct, productId)
       
-      setProducts(products.map(product => product.id !== productId ? product : updatedProduct))
+      setProducts(products.map(product => product.id !== productId ? product : updatedProduct));
+      if (callback) {
+        callback();
+      }
       } catch (error) {
       console.error(error)
     }
-  }
+  };
 
   return (
     <div id="app">

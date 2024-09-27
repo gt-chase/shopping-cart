@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Product as ProductType } from "../types/types";
 import { EditProductForm } from "./EditProductForm";
 
-export const Product = ({ title, quantity, price }: ProductType) => {
+export const Product = ({ id, title, quantity, price }: ProductType) => {
   const [showEditProductForm, setShowEditProductForm] = useState(false)
   
   const handleHideEditForm = (): void => {
@@ -23,6 +23,7 @@ export const Product = ({ title, quantity, price }: ProductType) => {
       </div>
       {showEditProductForm && (
         <EditProductForm
+          id={id}
           initialTitle={title}
           initialPrice={price}
           initialQuantity={quantity}
