@@ -30,6 +30,7 @@ export const AddProductForm = ({ onHideProductForm, onSubmit }: AddProductFormPr
             type="text"
             id="product-name"
             name="product-name"
+            value={title}
             required
             onChange={(event) => setTitle(event.target.value)}
           />
@@ -42,6 +43,7 @@ export const AddProductForm = ({ onHideProductForm, onSubmit }: AddProductFormPr
             name="product-price"
             min="0"
             step="0.01"
+            value={price}
             required
             onChange={(event) => setPrice(Number(event.target.value))}
           />
@@ -53,6 +55,7 @@ export const AddProductForm = ({ onHideProductForm, onSubmit }: AddProductFormPr
             id="product-quantity"
             name="product-quantity"
             min="0"
+            value={quantity}
             required
             onChange={(event) => setQuantity(Number(event.target.value))}
           />

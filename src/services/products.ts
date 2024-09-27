@@ -12,3 +12,10 @@ export const createProduct = async (product: NewProduct) => {
   });
   return data;
 }
+
+export const editProduct = async (product: NewProduct, id: string) => {
+  const { data } = await axios.put(`/api/products/${id}`, {
+    ...product
+  });
+  return data
+}
