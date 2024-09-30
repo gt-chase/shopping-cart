@@ -18,7 +18,7 @@ export const AddProductForm = ({ onHideProductForm, onSubmit }: AddProductFormPr
   };
 
   return (
-    <div className="add-form">
+    <div className="add-form" data-testid="test-add-form">
       <form onSubmit={(event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         onSubmit({ title, price, quantity }, reset);
